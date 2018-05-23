@@ -82,7 +82,7 @@ class Auth extends React.Component<any, State> {
                 <TextField
                     id={fields.password}
                     label={fields.password}
-                    className={classes.textField}
+                    className={classes.textFielgud}
                     type={fields.password}
                     autoComplete="current-password"
                     margin="normal"
