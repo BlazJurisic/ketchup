@@ -11,7 +11,7 @@ import Button from "@material-ui/core/es/Button/Button"
 //Local dependencies
 import locator from '../../state/Store'
 import makeRequest from '../../services/RESTService'
-import { login } from '../../services/Requests/AuthRequests'
+import { login, register } from '../../services/Requests/AuthRequests'
 
 type State = {
     email: ?string,
@@ -25,34 +25,48 @@ const fields = {
 
 @observer
 class Auth extends React.Component<any, State> {
-
     state = {
         email: '',
         password: ''
     }
 
     handleChange = (e: any) => {
-        this.setState({ [e.target.id]: e.target.value })
+        this.setState({ [e.target.id]: e.target.value }, ()=> console.log(this.state))
     }
 
     onSubmit = () => {
+        debugger
         const { email, password } = this.state
         if (!email || !password) return
         const config = login({
             email,
             password
         })
+        debugger
         makeRequest(config)
             .then(
-                user => locator.authStore.setUser(user)
+                response => console.log(response)// locator.authStore.setUser(user)
             )
             .catch()
+    }
+
+    register = (data: { username: string, email: string, password: string }) => {
+        // const mockUser = {
+        //     username: 'blaz',
+        //     email: 'jurisic.blaz@gmail.com',
+        //     password: 'jasamblaz'
+
+        // }
+        const config = register(data)
+        makeRequest(config)
+            .then(
+                response => console.log(response.data)
+            )
     }
 
     render() {
         const { classes } = this.props
         const { isLoggedIn } = locator.authStore
-
         return (
             <form className={classes.container} autoComplete="off">
                 <TextField
@@ -66,7 +80,7 @@ class Auth extends React.Component<any, State> {
                     disabled={isLoggedIn}
                 />
                 <TextField
-                    id="password-input"
+                    id={fields.password}
                     label={fields.password}
                     className={classes.textField}
                     type={fields.password}
@@ -91,14 +105,14 @@ class Auth extends React.Component<any, State> {
 }
 
 const styles = {
-        button: {
-            marginTop: '30px',
-        },
-        container: {
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center'
-        }
+    button: {
+        marginTop: '30px',
+    },
+    container: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
+    }
 }
 
 export default withStyles(styles)(Auth)

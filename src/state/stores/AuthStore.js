@@ -1,22 +1,30 @@
 // @flow
 
 import { decorate, observable, computed, autorun } from 'mobx'
-class Store {
-	@observable smth: Array<string> = []
+
+type User = {
+    email: string,
+    token: string
+}
+class AuthStore {
+	@observable user: User
 
     constructor() {
-        autorun(() => console.log(this.getLengthOfSmth))
+        autorun(() => console.log(this.user))
     }
 
-	@computed get getLengthOfSmth() {
-    	return this.smth.length
+	@computed get User(): User {
+    	return this.user
     }
-
+    
+    @computed get isLoggedIn(): boolean {
+    	return !!this.user
+    }
 
     //Actions
-	addSome(some: string) {
-		this.smth.push(some)
+	setUser(user: User) {
+		this.user = user
 	}
 }
-const store = new Store()
+const store = new AuthStore()
 export default store

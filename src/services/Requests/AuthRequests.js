@@ -1,17 +1,26 @@
-// export const newUserSchema = (data: any, image: ?File) => {
-//     const storageService = new StorageService()
-//     const persistenceService = new PersistenceService(storageService)
-//     const formData = new FormData()
-//     formData.append("data", JSON.stringify(data))
-//     if (image) {
-//         formData.append("image", image)
-//     }
+export const login = (data: { email: string, password: string }) => {
+    return {
+        method: 'post',
+        url: '/neki/levi/url',
+        data
+    }
+}
+
+export const register = (data: { username: string, email: string, password: string }) => {
+    return {
+        method: 'post',
+        url: '/auth/register',
+        data
+    }
+}
+
+// export const login = (data: any) => { 
 //     return {
 //         method: 'post',
-//         url: '/admin/newUser',
+//         url: '/neki/levi/url',
 //         headers: {
 //             'Authorization': persistenceService.getToken()
 //         },
-//         data: formData
+//         data
 //     }
 // }
