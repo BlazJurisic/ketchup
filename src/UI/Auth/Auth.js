@@ -25,6 +25,12 @@ const fields = {
 
 @observer
 class Auth extends React.Component<any, State> {
+
+    state = {
+        email: '',
+        password: ''
+    }
+
     handleChange = (e: any) => {
         this.setState({ [e.target.id]: e.target.value })
     }
@@ -84,4 +90,15 @@ class Auth extends React.Component<any, State> {
     }
 }
 
-export default withStyles({})(Auth)
+const styles = {
+        button: {
+            marginTop: '30px',
+        },
+        container: {
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center'
+        }
+}
+
+export default withStyles(styles)(Auth)

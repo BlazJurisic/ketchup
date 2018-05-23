@@ -6,11 +6,11 @@ const instance = axios.create({
     timeout: 100000,
     headers: {
         'authorization-static': Config.AuthorizationStatic,
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
     }
 })
 
-makeRequest = (config) => {
+const makeRequest = (config) => {
     console.log(config)
     return this.instance.request(config)
         .then(response => {
