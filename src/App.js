@@ -11,12 +11,14 @@ import NotFound from "./NotFound/NotFound"
 import Auth from "./UI/Auth/Auth"
 
 import {MuiThemeProvider} from '@material-ui/core/styles'
+import Navbar from "./UI/Navigation/Navbar"
+import Landing from "./UI/Landing/Landing"
 
 class App extends Component<any> {
     render() {
         return (
             <MuiThemeProvider theme={theme}>
-                <Auth/>
+                <Landing/>
             </MuiThemeProvider>
         )
     }
